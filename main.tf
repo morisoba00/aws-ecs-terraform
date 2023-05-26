@@ -7,7 +7,7 @@ terraform {
     dynamodb_table = "aws-ecs-terraform-tfstate-locking"
     encrypt        = true
   }
-}
+
 
   required_providers {
     aws = {
