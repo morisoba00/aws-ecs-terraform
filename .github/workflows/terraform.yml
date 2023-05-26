@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  OIDC_ARN: arn:aws:iam::761817748648:role/GitHubActionsOIDC
+  OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
   # Change to your AWS account id
 
 permissions:
