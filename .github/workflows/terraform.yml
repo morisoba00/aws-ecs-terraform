@@ -9,7 +9,8 @@ on:
       - main
 
 env:
-  OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
+  OIDC_ARN: arn:aws:iam::761817748648:role/GitHubActionsOIDC
+  # Change to your AWS account id
 
 permissions:
   id-token: write
@@ -27,9 +28,7 @@ jobs:
         env:
           TFCMT_VERSION: v4.0.0
         run: |
-          wget 
-"https://github.com/suzuki-shunsuke/tfcmt/releases/download/${TFCMT_VERSION}/tfcmt_linux_amd64.tar.gz" 
--O /tmp/tfcmt.tar.gz
+          wget "https://github.com/suzuki-shunsuke/tfcmt/releases/download/${TFCMT_VERSION}/tfcmt_linux_amd64.tar.gz" -O /tmp/tfcmt.tar.gz
           tar xzf /tmp/tfcmt.tar.gz -C /tmp
           mv /tmp/tfcmt /usr/local/bin
           tfcmt --version
