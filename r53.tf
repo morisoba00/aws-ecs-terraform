@@ -1,10 +1,10 @@
 resource "aws_route53_zone" "d-wiki_zone" {
-  name = "d-wiki.com"
+  name = locals.url
 }
 
 resource "aws_route53_record" "record" {
   zone_id = aws_route53_zone.d-wiki_zone.zone_id
-  name    = "d-wiki.com"
+  name    = locals.url
   type    = "A"
 
   alias {
