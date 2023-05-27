@@ -2,12 +2,12 @@ locals {
   url     = "d-wiki.com"
   stg_url = "stg.${local.url}"
 }
-resource "aws_route53_zone" "d-wiki_zone" {
+resource "aws_route53_zone" "zone" {
   name = local.url
 }
 
-resource "aws_route53_record" "d-wiki_record" {
-  zone_id = aws_route53_zone.d-wiki_zone.zone_id
+resource "aws_route53_record" "record" {
+  zone_id = aws_route53_zone.zone.zone_id
   name    = local.url
   type    = "A"
 
