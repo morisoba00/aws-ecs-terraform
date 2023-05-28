@@ -56,7 +56,7 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: tfcmt -chdir=./sub plan -patch -- terraform plan -no-color -input=false
+        run: tfcmt plan -patch -- terraform -chdir=./sub plan -no-color -input=false
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -66,4 +66,4 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: tfcmt apply -- terraform apply -auto-approve -input=false -chdir=./sub
+        run: tfcmt apply -- terraform apply -chdir=./sub -auto-approve -input=false -chdir=./sub
