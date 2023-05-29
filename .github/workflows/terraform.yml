@@ -24,10 +24,10 @@ jobs:
     steps:
       - name: echo aa
         run: |
-          echo ${{aa}}
+          echo ${{env.aa}}
           echo .bb >> $GITHUB_ENV
       - name: echo aa v2
-        run: echo ${{aa}}
+        run: echo ${{env.aa}}
 
       - name: Checkout
         uses: actions/checkout@v3
