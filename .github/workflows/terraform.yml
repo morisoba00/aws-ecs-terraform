@@ -12,6 +12,7 @@ env:
   OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
   # Change to your AWS account id
   aa: ./aaa
+  emp: zzzz
 
 permissions:
   id-token: write
@@ -26,8 +27,12 @@ jobs:
         run: |
           echo ${{env.aa}}
           echo "aa=./bb" >> $GITHUB_ENV
+          echo empty${{env.emp}}empty
+          echo "empty=" >> $GITHUB_ENV
       - name: echo aa v2
-        run: echo ${{env.aa}}
+        run: |
+          echo ${{env.aa}}
+          echo empty${{env.emp}}empty
 
       - name: Checkout
         uses: actions/checkout@v3
