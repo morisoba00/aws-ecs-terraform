@@ -25,7 +25,7 @@ jobs:
       - name: echo aa
         run: |
           echo ${{env.aa}}
-          echo .bb >> $GITHUB_ENV
+          echo "aa=./bb" >> $GITHUB_ENV
       - name: echo aa v2
         run: echo ${{env.aa}}
 
