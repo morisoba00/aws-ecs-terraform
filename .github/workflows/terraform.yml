@@ -11,6 +11,7 @@ on:
 env:
   OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
   # Change to your AWS account id
+  aa: ./aaa
 
 permissions:
   id-token: write
@@ -21,6 +22,13 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
+      - name: echo aa
+        run: |
+          echo ${{aa}}
+          echo .bb >> $GITHUB_ENV
+      - name: echo aa v2
+        run: echo ${{aa}}
+
       - name: Checkout
         uses: actions/checkout@v3
 
