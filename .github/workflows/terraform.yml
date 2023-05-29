@@ -12,7 +12,7 @@ env:
   OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
   # Change to your AWS account id
   aa: ./aaa
-  emp: zzzz
+  emp:
 
 permissions:
   id-token: write
