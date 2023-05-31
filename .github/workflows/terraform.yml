@@ -11,6 +11,8 @@ on:
 env:
   OIDC_ARN: arn:aws:iam::972365086582:role/GitHubActionsOIDC
   # Change to your AWS account id
+  aa: ./aaa
+  emp:
 
 permissions:
   id-token: write
@@ -21,6 +23,17 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
+      - name: echo aa
+        run: |
+          echo ${{env.aa}}
+          echo "aa=./bb" >> $GITHUB_ENV
+          echo empty${{env.emp}}empty
+          echo "empty=" >> $GITHUB_ENV
+      - name: echo aa v2
+        run: |
+          echo ${{env.aa}}
+          echo empty${{env.emp}}empty
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -41,22 +54,22 @@ jobs:
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform -chdir=./sub fmt -check 
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform -chdir=./sub  init 
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform -chdir=./sub validate  -no-color
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: tfcmt plan -patch -- terraform plan -no-color -input=false
+        run: tfcmt plan -patch -- terraform -chdir=./sub plan -no-color -input=false
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -66,4 +79,4 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: tfcmt apply -- terraform apply -auto-approve -input=false
+        run: tfcmt apply -- terraform apply -chdir=./sub -auto-approve -input=false -chdir=./sub
